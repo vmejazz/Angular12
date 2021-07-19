@@ -1,0 +1,147 @@
+<div class="h-screen font-sans login bg-cover">
+  <div class="container mx-auto h-full flex flex-1 justify-center items-center">
+    <div class="w-full max-w-lg">
+      <div class="leading-loose">
+        <form
+          class="
+            max-w-sm
+            p-10
+            bg-white bg-opacity-25
+            rounded
+            shadow-xl
+            m-auto
+            mb-7
+          "
+          name="loginForm"
+          [formGroup]="loginForm"
+          (ngSubmit)="loginForm.valid && onSubmit()"
+        >
+          <p class="text-white font-medium text-center text-lg">LOGIN</p>
+          <div class="">
+            <label class="block text-sm text-white" for="email">E-mail</label>
+            <input
+              class="
+                w-full
+                px-5
+                py-1
+                text-gray-700
+                bg-gray-300
+                rounded
+                focus:outline-none focus:bg-white
+              "
+              type="email"
+              id="email"
+              placeholder="Введите свой email"
+              aria-label="email"
+              required
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid':
+                  loginForm.get('email')?.touched &&
+                  loginForm.get('email')?.invalid
+              }"
+            />
+            <div
+              *ngIf="loginForm.get('email')?.errors?.email"
+              class="text-red-400"
+            >
+              Не верный email
+            </div>
+          </div>
+          <div class="mt-2">
+            <label class="block text-sm text-white">Пароль</label>
+            <input
+              class="
+                w-full
+                px-5
+                py-1
+                text-gray-700
+                bg-gray-300
+                rounded
+                focus:outline-none focus:bg-white
+              "
+              type="password"
+              id="password"
+              placeholder="Введите свой пароль"
+              arial-label="password"
+              required
+              formControlName="password"
+              [ngClass]="{
+                'is-invalid':
+                  loginForm.get('password')?.touched &&
+                  loginForm.get('password')?.invalid
+              }"
+            />
+            <div
+              class="text-red-400"
+              *ngIf="loginForm.get('email')?.errors?.minlength"
+            >
+              Нужная длина знаков не меньше 6
+            </div>
+          </div>
+
+          <div class="mt-4 items-center flex justify-between">
+            <button
+              class="
+                px-4
+                py-1
+                text-white
+                font-light
+                tracking-wider
+                bg-gray-900
+                hover:bg-gray-800
+                rounded
+              "
+              type="submit"
+            >
+              Вход
+            </button>
+            <a
+              class="
+                inline-block
+                right-0
+                align-baseline
+                font-bold
+                text-sm text-500 text-white
+                hover:text-red-400
+                cursor-pointer
+              "
+              (click)="onLostPass()"
+            >
+              {{
+                (showPage$ | async)
+                  ? "Увы, ничем не могу помочь"
+                  : "Забыли пароль?"
+              }}
+            </a>
+          </div>
+          <div class="text-center">
+            <a
+              class="
+                inline-block
+                right-0
+                align-baseline
+                font-light
+                text-sm text-500
+                hover:text-red-400
+                cursor-pointer
+              "
+              (click)="goToDashboard()"
+            >
+              Текст который никто не читает
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<style>
+  .login {
+    background: url("assets/img/wallpaperbetter.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+</style>

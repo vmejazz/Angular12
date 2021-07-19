@@ -1,0 +1,7 @@
+.tooltipName {
+  display: none;
+}
+
+.itemName:hover .tooltipName {
+  display: block;
+}
